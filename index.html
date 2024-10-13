@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virus Detected!</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ff0000;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: blink 1s infinite;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .console {
+            border: 2px solid #ff0000;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            opacity: 0.8;
+        }
+        .warning {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="console">
+        <h1>ALERTA DE VIRUS</h1>
+        <p>Se ha detectado un virus en tu sistema!</p>
+        <p class="warning">¡Tu computadora podría estar en peligro!</p>
+        <p>Iniciando escaneo...</p>
+        <div id="scanResults"></div>
+    </div>
+
+    <script>
+        const scanResults = document.getElementById('scanResults');
+
+        // Simular escaneo
+        const messages = [
+            "Escaneando archivos...",
+            "Analizando procesos...",
+            "Detectando vulnerabilidades...",
+            "Acceso no autorizado detectado!",
+            "Virus encontrado: Trojan.Win32.Generic!",
+            "Tu sistema está en riesgo!",
+            "Recomendamos desconectar el internet!",
+            "Reiniciando sistema...",
+        ];
+
+        let index = 0;
+        const interval = setInterval(() => {
+            if (index < messages.length) {
+                const messageElement = document.createElement('p');
+                messageElement.textContent = messages[index];
+                scanResults.appendChild(messageElement);
+                index++;
+            } else {
+                clearInterval(interval);
+                const finalMessage = document.createElement('p');
+                finalMessage.innerHTML = "<strong>¡Tu computadora ha sido infectada!</strong><br>Reinicia para intentar arreglarlo.";
+                scanResults.appendChild(finalMessage);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
